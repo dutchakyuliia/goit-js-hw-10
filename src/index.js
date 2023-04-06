@@ -6,20 +6,20 @@ import { fetchCountries } from './fetchCountries';
 const DEBOUNCE_DELAY = 300;
 const inputEl = document.querySelector('#search-box');
 const countryList = document.querySelector('.country-list');
-const countriInfo = document.querySelector('.country-info');
+const countryInfo = document.querySelector('.country-info');
 
 let nameCountry = '';
 
 inputEl.addEventListener(
   'input',
   debounce(e => {
+    countryInfo.innerHTML = '';
     countryList.innerHTML = '';
-    countriInfo.innerHTML = '';
-    handlerInputCountry(e);
+    handleInputCountry(e);
   }, DEBOUNCE_DELAY)
 );
 
-function handlerInputCountry(e) {
+function handleInputCountry(e) {
   nameCountry = e.target.value.trim();
   if (nameCountry !== '') {
     fetchCountries(nameCountry)
@@ -64,7 +64,7 @@ function createCountry(data) {
 
   const lang = Object.values(languages);
 
-  countriInfo.innerHTML = `<img src=${svg} alt=${alt} width="50" height="50">
+  countryInfo.innerHTML = `<img src=${svg} alt=${alt} width="50" height="50">
 <h1>${official}</h1>
 <p><span class="title">Capital:</span> ${capital}</p>
 <p><span class="title">Population:</span> ${population}</p>
